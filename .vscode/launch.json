@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib/src/layout/window.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/src/layout/window.dart"
+        },
+        {
+            "name": "Flutter (lib/src/layout/window.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/src/layout/window.dart"
+        }
+    ]
+}
