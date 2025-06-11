@@ -1,4 +1,5 @@
 import 'package:aqua_ui/src/styles/colors.dart';
+import 'package:aqua_ui/src/styles/theme/global_styles.dart';
 import 'package:flutter/widgets.dart';
 
 class ProgressBar extends StatelessWidget {
@@ -48,11 +49,7 @@ class ProgressBar extends StatelessWidget {
             ),
             borderRadius: const BorderRadius.all(Radius.circular(3)),
             boxShadow: [
-              BoxShadow(
-                offset: Offset(0, 2),
-                color: Color.fromARGB(255, 161, 161, 161),
-                blurRadius: 2,
-              ),
+              GlobalStyles.controlsShadow
             ],
           ),
           child:
@@ -173,8 +170,8 @@ class _ProgressIndeterminatedBarWidgetState
                                 gradient: LinearGradient(
                                   colors: [
                                     Color(0x00ffffff),
-                                    Color.fromARGB(255, 73, 158, 255),
-                                    Color.fromARGB(255, 73, 158, 255),
+                                    Color.fromARGB(255, 93, 169, 255),
+                                    Color.fromARGB(255, 93, 169, 255),
                                     Color(0x00ffffff),
                                   ],
                                   stops: [0, 0.3, 0.7, 1],
