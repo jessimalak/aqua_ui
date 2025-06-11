@@ -27,6 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
   double _progress = 0;
   late final Timer _progressTimer;
 
+  bool _checkboxValue = false;
+
+  List<String> _radioOptions = ['One', 'Two', 'Tree'];
+  String _radioOption = 'One';
+
   @override
   void initState() {
     super.initState();
@@ -61,12 +66,36 @@ class _HomeScreenState extends State<HomeScreen> {
               spacing: 8,
               children: [
                 Text('content'),
-                AquaButton(child: Text('Primary Button')),
-                AquaButton(secondary: true, child: Text('Secondary Button')),
+                AquaButton(child: Text('Primary Button'), onTap: () {}),
+                AquaButton(
+                  secondary: true,
+                  child: Text('Secondary Button'),
+                  onTap: () {},
+                ),
               ],
             ),
             SizedBox(width: double.infinity, child: ProgressBar()),
-            SizedBox(width: double.infinity, child: ProgressBar(value: _progress)),
+            SizedBox(
+              width: double.infinity,
+              child: ProgressBar(value: _progress),
+            ),
+            AquaCheckbox(
+              value: _checkboxValue,
+              onChanged: (value) {
+                setState(() {
+                  _checkboxValue = value;
+                });
+              },
+            ),
+            ..._radioOptions.map(
+              (option) => AquaRadioButton(
+                value: option,
+                onChanged: (value) {
+                  setState(() => _radioOption = value);
+                },
+                groupValue: _radioOption,
+              ),
+            ),
           ],
         ),
       ),
