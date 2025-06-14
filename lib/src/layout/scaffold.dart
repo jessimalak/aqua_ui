@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:aqua_ui/src/styles/colors.dart';
 import 'package:aqua_ui/src/styles/theme.dart';
 import 'package:flutter/cupertino.dart';
