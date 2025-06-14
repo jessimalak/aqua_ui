@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:aqua_ui/src/styles/colors.dart';
 import 'package:aqua_ui/src/styles/theme.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AquaScaffold extends StatelessWidget {
   final Widget child;
@@ -12,15 +15,47 @@ class AquaScaffold extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     final theme = AquaTheme.of(context);
     final background = backgroundType ?? theme.backgroundType;
-    return ColoredBox(
-      color: Color.fromARGB(255, 236, 236, 236),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 236, 236, 236),
+        image:
+            background != BackgroundType.metal
+                ? null
+                : DecorationImage(
+                  image: AssetImage(
+                    'assets/background/brushed_metal.png',
+                    package: 'aqua_ui',
+                  ),
+                  fit: BoxFit.none,
+                  repeat: ImageRepeat.repeat,
+                ),
+      ),
       child: SizedBox(
         height: size.height,
         width: size.width,
         child: Stack(
           children: [
-            if (background != BackgroundType.flat)
-              CustomPaint(painter: _BackgroundPainer(), size: size),
+            if (background == BackgroundType.lines)
+              RepaintBoundary(child: CustomPaint(painter: _LinesBackgroundPainer(), size: size)),
+            if (background == BackgroundType.metal)
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        DefaultAquaColors
+                            .aquaTransparentWhite, // aquaTransparentWhite
+                        DefaultAquaColors
+                            .aquaTranslucentWhite, // aquaTranslucentWhite
+                        DefaultAquaColors
+                            .aquaTransparentWhite, // aquaTransparentWhite
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                  ),
+                ),
+              ),
             child,
           ],
         ),
@@ -29,7 +64,7 @@ class AquaScaffold extends StatelessWidget {
   }
 }
 
-class _BackgroundPainer extends CustomPainter {
+class _LinesBackgroundPainer extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint whitePaint =
@@ -53,5 +88,5 @@ class _BackgroundPainer extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
