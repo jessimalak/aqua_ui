@@ -51,8 +51,8 @@ class _AquaCheckboxState extends State<AquaCheckbox> {
         widget.onChanged!(!widget.value);
       },
       child: MouseRegion(
-        onEnter: (event) => setState(() => _hover = true),
-        onExit: (event) => setState(() => _hover = false),
+        onEnter: !isEnabled ? null : (event) => setState(() => _hover = true),
+        onExit: !isEnabled ? null : (event) => setState(() => _hover = false),
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
@@ -90,7 +90,7 @@ class _AquaCheckboxState extends State<AquaCheckbox> {
                 ),
               ),
             ),
-            topShine,
+            if (isEnabled) topShine,
 
             Positioned(
               right: padding / 23,

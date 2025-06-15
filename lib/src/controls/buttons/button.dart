@@ -8,7 +8,12 @@ class AquaButton extends StatefulWidget {
   final Widget child;
   final bool secondary;
   final VoidCallback? onTap;
-  const AquaButton({super.key, required this.child, this.secondary = false, required this.onTap});
+  const AquaButton({
+    super.key,
+    required this.child,
+    this.secondary = false,
+    required this.onTap,
+  });
 
   @override
   State<AquaButton> createState() => _AquaButtonState();
@@ -22,6 +27,7 @@ class _AquaButtonState extends State<AquaButton> {
   @override
   Widget build(BuildContext context) {
     final radius = BorderRadius.all(Radius.circular(20));
+    final disabled = widget.onTap == null;
     final topShine = Positioned(
       top: 0,
       left: 4,
@@ -49,30 +55,33 @@ class _AquaButtonState extends State<AquaButton> {
     );
     return GestureDetector(
       onTap: widget.onTap,
-      onTapDown: (details) => setState(() => _pressed = true),
-      onTapUp: (details) => setState(() => _pressed = false),
+      onTapDown: disabled ? null : (details) => setState(() => _pressed = true),
+      onTapUp: disabled ? null : (details) => setState(() => _pressed = false),
       child: MouseRegion(
-        onEnter: (event) => setState(() => _hover = true),
-        onExit: (event) => setState(() => _hover = false),
+        onEnter: disabled ? null : (event) => setState(() => _hover = true),
+        onExit: disabled ? null : (event) => setState(() => _hover = false),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 128),
           padding: const EdgeInsets.all(1),
           decoration: BoxDecoration(
-            gradient: widget.secondary ? ButtonStyle.secondaryBorderGradient : ButtonStyle.primaryBorderGradient,
+            gradient:
+                widget.secondary || disabled
+                    ? ButtonStyle.secondaryBorderGradient
+                    : ButtonStyle.primaryBorderGradient,
             borderRadius: radius,
-            boxShadow:
-                _hover
-                    ? GlobalStyles.hoverShadow
-                    : [],
+            boxShadow: _hover ? GlobalStyles.hoverShadow : [],
           ),
           child: DecoratedBox(
             decoration: BoxDecoration(
               borderRadius: radius,
-              gradient: widget.secondary ? ButtonStyle.secondaryBackgroundGradient : ButtonStyle.primaryBackgroundGradient,
+              gradient:
+                  widget.secondary || widget.onTap == null
+                      ? ButtonStyle.secondaryBackgroundGradient
+                      : ButtonStyle.primaryBackgroundGradient,
             ),
             child: Stack(
               children: [
-                if (widget.secondary && !_pressed) topShine,
+                if (widget.secondary && !_pressed && !disabled) topShine,
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 4, 16, 6),
                   child: DefaultTextStyle(
@@ -83,10 +92,20 @@ class _AquaButtonState extends State<AquaButton> {
                         BoxShadow(color: AquaColors.white, blurRadius: 4),
                       ],
                     ),
-                    child: widget.child,
+                    child: DefaultTextStyle(
+                      style: TextStyle(
+                        color:
+                            disabled
+                                ? DefaultAquaColors
+                                    .aquaSegmentedControlOutlineStroke
+                                : AquaColors.black,
+                                fontSize: 13
+                      ),
+                      child: widget.child,
+                    ),
                   ),
                 ),
-                if (!widget.secondary && !_pressed) topShine,
+                if (!widget.secondary && !_pressed && !disabled) topShine,
                 Positioned(
                   top: 0,
                   left: 4,

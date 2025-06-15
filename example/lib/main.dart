@@ -28,7 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
   late final Timer _progressTimer;
   final AquaTabController tabController = AquaTabController(length: 3);
 
-  bool _checkboxValue = false;
+  bool _checkbox1Value = true;
+  bool _checkbox2Value = false;
 
   List<String> _radioOptions = ['One', 'Two', 'Tree'];
   String _radioOption = 'One';
@@ -63,8 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           spacing: 8,
           children: [
-            
             SizedBox(width: double.infinity, child: ProgressBar()),
+            Text('Progress: ${_progress.toStringAsFixed(1)}%'),
             SizedBox(
               width: double.infinity,
               child: ProgressBar(value: _progress),
@@ -74,47 +75,85 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: tabController,
               tabs: [
                 AquaTab(label: 'Checkbox'),
-                AquaTab(label: 'Radio buttons'),
+                AquaTab(label: 'Radio options'),
                 AquaTab(label: 'Buttons'),
               ],
               children: [
                 Wrap(
                   children: [
-                    AquaCheckbox(
-                      value: _checkboxValue,
-                      onChanged: (value) {
-                        setState(() {
-                          _checkboxValue = value;
-                        });
-                      },
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AquaCheckbox(
+                          value: _checkbox1Value,
+                          onChanged: (value) {
+                            setState(() {
+                              _checkbox1Value = value;
+                            });
+                          },
+                        ),
+                        Text('Checkbox 1'),
+                      ],
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AquaCheckbox(
+                          value: _checkbox2Value,
+                          onChanged: (value) {
+                            setState(() {
+                              _checkbox2Value = value;
+                            });
+                          },
+                        ),
+                        Text('Checkbox 2'),
+                      ],
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AquaCheckbox(
+                          value: false,
+                          onChanged: null,
+                        ),
+                        Text('Disabled checkbox'),
+                      ],
                     ),
                   ],
                 ),
                 Wrap(
+                  spacing: 8,
                   children: [
                     ..._radioOptions.map(
-                      (option) => AquaRadioButton(
-                        value: option,
-                        onChanged: (value) {
-                          setState(() => _radioOption = value);
-                        },
-                        groupValue: _radioOption,
+                      (option) => Row(
+                        spacing: 4,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AquaRadioButton(
+                            value: option,
+                            onChanged: (value) {
+                              setState(() => _radioOption = value);
+                            },
+                            groupValue: _radioOption,
+                          ),
+                          Text(option),
+                        ],
                       ),
                     ),
                   ],
                 ),
                 Wrap(
-              spacing: 8,
-              children: [
-                Text('content'),
-                AquaButton(child: Text('Primary Button'), onTap: () {}),
-                AquaButton(
-                  secondary: true,
-                  child: Text('Secondary Button'),
-                  onTap: () {},
+                  spacing: 8,
+                  children: [
+                    AquaButton(child: Text('Primary Button'), onTap: () {}),
+                    AquaButton(
+                      secondary: true,
+                      child: Text('Secondary Button'),
+                      onTap: () {},
+                    ),
+                    AquaButton(onTap: null, child: Text('Disabled button')),
+                  ],
                 ),
-              ],
-            ),
               ],
             ),
           ],
