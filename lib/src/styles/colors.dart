@@ -6,6 +6,7 @@ class AquaColors {
   static const Color darkBlue = Color.fromARGB(255, 1, 34, 95);
   static const Color black = Color(0xff000000);
   static const Color lightGrey = Color(0xfff0f0f0);
+  static const Color transparent = Color(0x00ffffff);
 }
 
 class DefaultAquaColors {
@@ -46,5 +47,10 @@ class DefaultAquaColors {
   );
   static const Color aquaTransparentWhite = Color.fromRGBO(255, 255, 255, 0.1);
   static const Color aquaTranslucentWhite = Color.fromRGBO(255, 255, 255, 0.5);
+  static const Color aquaTransparentGray = Color.fromRGBO(102, 102, 102, 0.1);
+  static const Color aquaTranslucentGray = Color.fromRGBO(102, 102, 102, 0.5);
   static const Color aquaBrushedMetalStroke = Color.fromRGBO(65, 65, 65, 0.5);
+
+  static const Color aquaTabBackground = Color.fromRGBO(179, 179, 179, 0.223);
+  static const Color aquaTabOutline = Color.fromRGBO(201, 201, 201, 1);
 }
