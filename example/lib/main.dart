@@ -26,6 +26,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   double _progress = 0;
   late final Timer _progressTimer;
+  final AquaTabController tabController = AquaTabController(length: 3);
 
   bool _checkboxValue = false;
 
@@ -62,7 +63,47 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           spacing: 8,
           children: [
-            Wrap(
+            
+            SizedBox(width: double.infinity, child: ProgressBar()),
+            SizedBox(
+              width: double.infinity,
+              child: ProgressBar(value: _progress),
+            ),
+
+            AquaTabView(
+              controller: tabController,
+              tabs: [
+                AquaTab(label: 'Checkbox'),
+                AquaTab(label: 'Radio buttons'),
+                AquaTab(label: 'Buttons'),
+              ],
+              children: [
+                Wrap(
+                  children: [
+                    AquaCheckbox(
+                      value: _checkboxValue,
+                      onChanged: (value) {
+                        setState(() {
+                          _checkboxValue = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                Wrap(
+                  children: [
+                    ..._radioOptions.map(
+                      (option) => AquaRadioButton(
+                        value: option,
+                        onChanged: (value) {
+                          setState(() => _radioOption = value);
+                        },
+                        groupValue: _radioOption,
+                      ),
+                    ),
+                  ],
+                ),
+                Wrap(
               spacing: 8,
               children: [
                 Text('content'),
@@ -74,27 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            SizedBox(width: double.infinity, child: ProgressBar()),
-            SizedBox(
-              width: double.infinity,
-              child: ProgressBar(value: _progress),
-            ),
-            AquaCheckbox(
-              value: _checkboxValue,
-              onChanged: (value) {
-                setState(() {
-                  _checkboxValue = value;
-                });
-              },
-            ),
-            ..._radioOptions.map(
-              (option) => AquaRadioButton(
-                value: option,
-                onChanged: (value) {
-                  setState(() => _radioOption = value);
-                },
-                groupValue: _radioOption,
-              ),
+              ],
             ),
           ],
         ),
