@@ -26,6 +26,7 @@ class AquaScaffold extends StatelessWidget {
                   ),
                   fit: BoxFit.none,
                   repeat: ImageRepeat.repeat,
+                  alignment: AlignmentGeometry.topLeft
                 ),
       ),
       child: SizedBox(
