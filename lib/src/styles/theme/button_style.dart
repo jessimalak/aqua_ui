@@ -8,7 +8,7 @@ class ButtonStyle {
     end: Alignment.topCenter,
   );
   static const LinearGradient primaryBackgroundGradient = LinearGradient(
-    colors: [Color(0xFF0075FE), Color(0xFF74EBFF)],
+    colors: [Color(0xFF0099FF), Color(0xFFB5EEFE),],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
