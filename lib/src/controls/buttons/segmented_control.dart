@@ -3,8 +3,8 @@ import 'package:aqua_ui/src/layout/tab_view/tab_controller.dart';
 import 'package:aqua_ui/src/library.dart';
 import 'package:aqua_ui/src/styles/colors.dart';
 import 'package:aqua_ui/src/styles/theme/button_style.dart';
-import 'package:aqua_ui/src/styles/theme/tab_style.dart';
 
+// BASED ON macos_ui
 /// {@template AquaSegmentedControl}
 /// Displays one or more navigational tabs in a single horizontal group.
 ///

@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+// BASED ON macos_ui
 /// {@template AquaTabController}
 /// Coordinates tab selection for [AquaSegmentedControl] and [AquaTabView].
 ///

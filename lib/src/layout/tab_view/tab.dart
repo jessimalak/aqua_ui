@@ -1,10 +1,10 @@
+import 'package:aqua_ui/aqua_ui.dart';
 import 'package:aqua_ui/src/styles/colors.dart';
 import 'package:aqua_ui/src/styles/theme/button_style.dart';
 import 'package:flutter/cupertino.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_shadow/flutter_inset_shadow.dart';
 
-const _kTabBorderRadius = BorderRadius.all(Radius.circular(4.0));
-
+// BASED ON macos_ui
 /// {@template AquaTab}
 /// A Aqua-style navigational button used to move between the views of a
 /// [AquaTabView].
@@ -22,17 +22,24 @@ class AquaTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final brightness = AquaTheme.brightnessOf(context);
+    final style = TabStyleProvider.of(context) ?? TabStyle.segmented;
     return PhysicalModel(
-      color: active ? DefaultAquaColors.aquaSegmentedControlOutlineStroke : AquaColors.transparent,
+      color:
+          active
+              ? DefaultAquaColors.aquaSegmentedControlOutlineStroke
+              : AquaColors.transparent,
       // borderRadius: _kTabBorderRadius,
       child: DecoratedBox(
         decoration: BoxDecoration(
           boxShadow: [
-            if(active)
-            BoxShadow(inset: true, color: AquaColors.blue, offset: Offset(0, 1.5),)
-          ] ,
-          gradient: active ? ButtonStyle.primaryBackgroundGradient : null
+            if (active)
+              BoxShadow(
+                inset: true,
+                color: AquaColors.blue,
+                offset: Offset(0, 1.5),
+              ),
+          ],
+          gradient: active ? ButtonStyle.primaryBackgroundGradient : null,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
@@ -47,3 +54,5 @@ class AquaTab extends StatelessWidget {
     return AquaTab(label: label ?? this.label, active: active ?? this.active);
   }
 }
+
+enum TabStyle { classic, segmented }
