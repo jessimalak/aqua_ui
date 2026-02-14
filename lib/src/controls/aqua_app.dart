@@ -1,75 +1,74 @@
 import 'package:aqua_ui/src/layout/scrollbar.dart';
+import 'package:aqua_ui/src/library.dart';
 import 'package:aqua_ui/src/styles/theme.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart' as m;
 
 class AquaApp extends StatefulWidget {
-  const AquaApp(
-      {super.key,
-      this.home,
-      this.navigatorKey,
-      this.routes = const {},
-      this.initialRoute,
-      this.onGenerateRoute,
-      this.onGenerateInitialRoutes,
-      this.onUnknownRoute,
-      this.navigatorObservers = const [],
-      this.builder,
-      required this.title,
-      this.onGenerateTitle,
-      this.locale,
-      this.localizationsDelegates,
-      this.localeListResolutionCallback,
-      this.localeResolutionCallback,
-      this.supportedLocales = const <Locale>[Locale('en', 'US')],
-      this.showPerformanceOverlay = false,
-      this.checkerboardRasterCacheImages = false,
-      this.checkerboardOffscreenLayers = false,
-      this.showSemanticsDebugger = false,
-      this.debugShowCheckedModeBanner = true,
-      this.shortcuts,
-      this.actions,
-      this.restorationScopeId,
-      this.theme})
-      : routeInformationProvider = null,
-        routeInformationParser = null,
-        routerDelegate = null,
-        backButtonDispatcher = null,
-        routerConfig = null;
-  const AquaApp.router(
-      {super.key,
-      this.routeInformationProvider,
-      this.routeInformationParser,
-      this.routerDelegate,
-      this.backButtonDispatcher,
-      this.routerConfig,
-      this.builder,
-      required this.title,
-      this.onGenerateTitle,
-      this.locale,
-      this.localizationsDelegates,
-      this.localeListResolutionCallback,
-      this.localeResolutionCallback,
-      this.supportedLocales = const <Locale>[
-        Locale('en', 'US'),
-      ],
-      this.showPerformanceOverlay = false,
-      this.checkerboardRasterCacheImages = false,
-      this.checkerboardOffscreenLayers = false,
-      this.showSemanticsDebugger = false,
-      this.debugShowCheckedModeBanner = true,
-      this.shortcuts,
-      this.actions,
-      this.restorationScopeId,
-      this.theme})
-      : navigatorObservers = null,
-        navigatorKey = null,
-        onGenerateRoute = null,
-        home = null,
-        onUnknownRoute = null,
-        initialRoute = null,
-        onGenerateInitialRoutes = null,
-        routes = null;
+  const AquaApp({
+    super.key,
+    this.home,
+    this.navigatorKey,
+    this.routes = const {},
+    this.initialRoute,
+    this.onGenerateRoute,
+    this.onGenerateInitialRoutes,
+    this.onUnknownRoute,
+    this.navigatorObservers = const [],
+    this.builder,
+    required this.title,
+    this.onGenerateTitle,
+    this.locale,
+    this.localizationsDelegates,
+    this.localeListResolutionCallback,
+    this.localeResolutionCallback,
+    this.supportedLocales = const <Locale>[Locale('en', 'US')],
+    this.showPerformanceOverlay = false,
+    this.checkerboardRasterCacheImages = false,
+    this.checkerboardOffscreenLayers = false,
+    this.showSemanticsDebugger = false,
+    this.debugShowCheckedModeBanner = true,
+    this.shortcuts,
+    this.actions,
+    this.restorationScopeId,
+    this.theme,
+  }) : routeInformationProvider = null,
+       routeInformationParser = null,
+       routerDelegate = null,
+       backButtonDispatcher = null,
+       routerConfig = null;
+  const AquaApp.router({
+    super.key,
+    this.routeInformationProvider,
+    this.routeInformationParser,
+    this.routerDelegate,
+    this.backButtonDispatcher,
+    this.routerConfig,
+    this.builder,
+    required this.title,
+    this.onGenerateTitle,
+    this.locale,
+    this.localizationsDelegates,
+    this.localeListResolutionCallback,
+    this.localeResolutionCallback,
+    this.supportedLocales = const <Locale>[Locale('en', 'US')],
+    this.showPerformanceOverlay = false,
+    this.checkerboardRasterCacheImages = false,
+    this.checkerboardOffscreenLayers = false,
+    this.showSemanticsDebugger = false,
+    this.debugShowCheckedModeBanner = true,
+    this.shortcuts,
+    this.actions,
+    this.restorationScopeId,
+    this.theme,
+  }) : navigatorObservers = null,
+       navigatorKey = null,
+       onGenerateRoute = null,
+       home = null,
+       onUnknownRoute = null,
+       initialRoute = null,
+       onGenerateInitialRoutes = null,
+       routes = null;
   final Widget? home;
   final GlobalKey<NavigatorState>? navigatorKey;
   final Map<String, WidgetBuilder>? routes;
@@ -180,31 +179,37 @@ class _AquaAppState extends State<AquaApp> {
 
   @override
   Widget build(BuildContext context) {
-    return HeroControllerScope(
-        controller: _heroController, child: _builder(context, widget.home));
+    return HeroControllerScope(controller: _heroController, child: _builder(context, widget.home));
   }
 
-  bool get _usesRouter =>
-      widget.routerDelegate != null || widget.routerConfig != null;
+  bool get _usesRouter => widget.routerDelegate != null || widget.routerConfig != null;
 
+  Iterable<LocalizationsDelegate<dynamic>> get _localizationsDelegates sync* {
+    if (widget.localizationsDelegates != null) {
+      yield* widget.localizationsDelegates!;
+    }
+    yield DefaultMaterialLocalizations.delegate;
+    yield DefaultCupertinoLocalizations.delegate;
+    yield DefaultWidgetsLocalizations.delegate;
+  }
 
   Widget _aquaBuilder(BuildContext context, Widget? child) {
     final theme = widget.theme ?? AquaThemeData();
     return AquaTheme(
-        data: theme,
-        child: DefaultTextStyle(
-          style: TextStyle(color: theme.colorScheme.textColor, fontSize: 12),
-          child: widget.builder != null
-              ? Builder(
-                  builder: (context) => Overlay(
-                        initialEntries: [
-                          OverlayEntry(
-                              builder: (context) =>
-                                  widget.builder!(context, child))
-                        ],
-                      ))
-              : child ?? const SizedBox.shrink(),
-        ));
+      data: theme,
+      child: DefaultTextStyle(
+        style: TextStyle(color: theme.colorScheme.textColor, fontSize: 12),
+        child:
+            widget.builder != null
+                ? Builder(
+                  builder:
+                      (context) => Overlay(
+                        initialEntries: [OverlayEntry(builder: (context) => widget.builder!(context, child))],
+                      ),
+                )
+                : child ?? const SizedBox.shrink(),
+      ),
+    );
   }
 
   Widget _builder(BuildContext context, Widget? child) {
@@ -222,7 +227,7 @@ class _AquaAppState extends State<AquaApp> {
         locale: widget.locale,
         localeListResolutionCallback: widget.localeListResolutionCallback,
         localeResolutionCallback: widget.localeResolutionCallback,
-        localizationsDelegates: widget.localizationsDelegates,
+        localizationsDelegates: _localizationsDelegates,
         supportedLocales: widget.supportedLocales,
         showPerformanceOverlay: widget.showPerformanceOverlay,
         checkerboardRasterCacheImages: widget.checkerboardRasterCacheImages,
@@ -248,7 +253,7 @@ class _AquaAppState extends State<AquaApp> {
       locale: widget.locale,
       localeListResolutionCallback: widget.localeListResolutionCallback,
       localeResolutionCallback: widget.localeResolutionCallback,
-      localizationsDelegates: widget.localizationsDelegates,
+      localizationsDelegates: _localizationsDelegates,
       supportedLocales: widget.supportedLocales,
       showPerformanceOverlay: widget.showPerformanceOverlay,
       checkerboardRasterCacheImages: widget.checkerboardRasterCacheImages,
@@ -266,8 +271,7 @@ class AquaScrollBehavior extends ScrollBehavior {
   const AquaScrollBehavior();
 
   @override
-  Widget buildScrollbar(
-      BuildContext context, Widget child, ScrollableDetails details) {
+  Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
     return AquaScrollbar(controller: details.controller, child: child);
   }
 }
