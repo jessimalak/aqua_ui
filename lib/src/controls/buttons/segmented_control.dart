@@ -120,26 +120,7 @@ class _AquaSegmentedControlState extends State<AquaSegmentedControl> {
             top: 1,
             left: 2,
             right: 2,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(5),
-                  bottom: Radius.circular(2),
-                ),
-                gradient: LinearGradient(
-                  colors: [
-                    Color.fromRGBO(255, 255, 255, 0.6),
-                    Color.fromRGBO(255, 255, 255, 0.0),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-                // boxShadow: [
-                //   BoxShadow(color: Color.fromRGBO(255, 255, 255, 0.5), blurRadius: 3),
-                // ],
-              ),
-              child: SizedBox(height: 4),
-            ),
+            child: const ButtonTopShine(size: ButtonShineSize.small),
           ),
         ],
       ),

@@ -32,26 +32,7 @@ class _AquaButtonState extends State<AquaButton> {
       top: 0,
       left: 4,
       right: 4,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(32),
-            bottom: Radius.circular(10),
-          ),
-          gradient: LinearGradient(
-            colors: [
-              Color.fromRGBO(255, 255, 255, 0.6),
-              Color.fromRGBO(255, 255, 255, 0.0),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          // boxShadow: [
-          //   BoxShadow(color: Color.fromRGBO(255, 255, 255, 0.5), blurRadius: 3),
-          // ],
-        ),
-        child: SizedBox(height: 12),
-      ),
+      child: const ButtonTopShine(size: ButtonShineSize.normal,)
     );
     return GestureDetector(
       onTap: widget.onTap,
