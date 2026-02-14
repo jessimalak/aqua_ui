@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<String> _radioOptions = ['One', 'Two', 'Tree'];
   String _radioOption = 'One';
+  BackgroundType _backgroundType = BackgroundType.flat;
 
   @override
   void initState() {
@@ -58,26 +59,35 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return AquaScaffold(
-      backgroundType: BackgroundType.lines,
+      backgroundType: _backgroundType,
       child: Padding(
         padding: EdgeInsets.all(8.0),
         child: Column(
           spacing: 8,
           children: [
+            Row(
+              children: [
+                Text('Background type: '),
+                AquaDropdownButton(
+                  value: _backgroundType,
+                  items:
+                      BackgroundType.values
+                          .map((type) => AquaDropdownMenuItem(value: type, child: Text(type.name)))
+                          .toList(),
+                  onChanged: (value) {
+                    if (value == null) return;
+                    setState(() => _backgroundType = value);
+                  },
+                ),
+              ],
+            ),
             SizedBox(width: double.infinity, child: ProgressBar()),
             Text('Progress: ${_progress.toStringAsFixed(1)}%'),
-            SizedBox(
-              width: double.infinity,
-              child: ProgressBar(value: _progress),
-            ),
+            SizedBox(width: double.infinity, child: ProgressBar(value: _progress)),
 
             AquaTabView(
               controller: tabController,
-              tabs: [
-                AquaTab(label: 'Checkbox'),
-                AquaTab(label: 'Radio options'),
-                AquaTab(label: 'Buttons'),
-              ],
+              tabs: [AquaTab(label: 'Checkbox'), AquaTab(label: 'Radio options'), AquaTab(label: 'Buttons')],
               children: [
                 Wrap(
                   children: [
@@ -111,13 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: [
-                        AquaCheckbox(
-                          value: false,
-                          onChanged: null,
-                        ),
-                        Text('Disabled checkbox'),
-                      ],
+                      children: [AquaCheckbox(value: false, onChanged: null), Text('Disabled checkbox')],
                     ),
                   ],
                 ),
@@ -146,11 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   spacing: 8,
                   children: [
                     AquaButton(child: Text('Primary Button'), onTap: () {}),
-                    AquaButton(
-                      secondary: true,
-                      child: Text('Secondary Button'),
-                      onTap: () {},
-                    ),
+                    AquaButton(secondary: true, child: Text('Secondary Button'), onTap: () {}),
                     AquaButton(onTap: null, child: Text('Disabled button')),
                   ],
                 ),
