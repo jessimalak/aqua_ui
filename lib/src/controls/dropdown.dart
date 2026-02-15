@@ -1056,7 +1056,7 @@ class _AquaDropdownButtonState<T> extends State<AquaDropdownButton<T>> with Widg
     super.dispose();
   }
 
-  TextStyle? get _textStyle => widget.style ?? TextStyle(color: CupertinoColors.darkBackgroundGray);
+  TextStyle? get _textStyle => widget.style ?? TextStyle(color: CupertinoColors.darkBackgroundGray, fontSize: 13);
 
   bool get _enabled => widget.items != null && widget.items!.isNotEmpty && widget.onChanged != null;
 
@@ -1184,14 +1184,14 @@ _ButtonStyles _getButtonStyles(bool enabled, BuildContext context) {
   // final theme = MacosTheme.of(context);
   // final brightness = theme.brightness;
   // final popupTheme = AquaDropdownButtonTheme.of(context);
-  Color textColor = AquaColors.darkBlue;
+  Color textColor = AquaColors.black;
   Color bgColor = AquaColors.white;
   Color borderColor = const Color(0xffc3c4c9);
   Color caretColor = AquaColors.darkBlue;
   Color caretBgColor = AquaColors.darkBlue;
   if (!enabled) {
     caretBgColor = AquaColors.transparent;
-    textColor = AquaColors.black;
+    textColor = DefaultAquaColors.aquaGray;
     bgColor = (const Color(0xfff2f3f5));
     borderColor = (const Color(0xff979797));
   } else {
