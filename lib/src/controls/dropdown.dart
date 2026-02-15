@@ -16,7 +16,7 @@ const double _kMinInteractiveDimension = 24.0;
 const EdgeInsets _kMenuItemPadding = EdgeInsets.symmetric(horizontal: 4.0);
 const Radius _kSideRadius = Radius.circular(5.0);
 const BorderRadius _kBorderRadius = BorderRadius.all(_kSideRadius);
-const double _kPopupButtonHeight = 20.0;
+const double _kPopupButtonHeight = 21.0;
 
 /// A builder to customize popup buttons.
 ///
