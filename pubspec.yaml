@@ -1,7 +1,7 @@
 name: aqua_ui
-description: "A new Flutter package project."
-version: 0.0.2
-homepage:
+description: "Revive the glossy Aqua era in your Flutter apps."
+version: 0.1.0
+homepage: "https://github.com/jessimalak/aqua_ui"
 
 environment:
   sdk: ^3.7.0
@@ -31,3 +31,7 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+screenshots:
+ - description: 'Window with widgets that have MacOS X aqua Style'
+ - path: 'images/screenshot_lines.png'
