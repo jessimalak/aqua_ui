@@ -34,4 +34,4 @@ flutter:
 
 screenshots:
  - description: 'Window with widgets that have MacOS X aqua Style'
- - path: 'images/screenshot_lines.png'
+   path: images/screenshot_lines.png
